@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>計測 — 立会い帳</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <main class="narrow section">
+    <h1>計測</h1>
+    <p>上の表は、このブラウザだけで数えた回数です。公開先の合計は、下のトークンを入れて取得します。記録の本文はどちらの数字にも入っていません。</p>
+    <div id="local"></div>
+    <form id="remote">
+      <label for="token">管理トークン</label>
+      <input id="token" type="password" autocomplete="off">
+      <div class="actions"><button class="btn" type="submit">公開先の合計を取得</button></div>
+    </form>
+    <pre id="remote-out"></pre>
+    <p><a href="index.html">説明に戻る</a></p>
+  </main>
+  <script src="js/metrics.js"></script>
+  <script>
+    var localBox = document.getElementById("local");
+    var data = TachiaiMetrics.readLocal();
+    var table = document.createElement("table");
+    Object.keys(TachiaiMetrics.ALLOWED).forEach(function (name) {
+      var tr = document.createElement("tr");
+      var th = document.createElement("th");
+      var td = document.createElement("td");
+      th.textContent = name;
+      td.textContent = String(data[name] || 0);
+      tr.appendChild(th);
+      tr.appendChild(td);
+      table.appendChild(tr);
+    });
+    localBox.appendChild(table);
+    document.getElementById("remote").addEventListener("submit", function (event) {
+      event.preventDefault();
+      var token = document.getElementById("token").value;
+      fetch("/api/stats", { headers: { Authorization: "Bearer " + token } })
+        .then(function (res) { return res.text().then(function (text) { return res.status + "\n" + text; }); })
+        .then(function (text) { document.getElementById("remote-out").textContent = text; })
+        .catch(function () { document.getElementById("remote-out").textContent = "取得できません。公開先の機能がまだ無い可能性があります。"; });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "立会い帳",
+  "short_name": "立会い帳",
+  "start_url": "app.html",
+  "display": "standalone",
+  "background_color": "#f3efe4",
+  "theme_color": "#221e1a",
+  "lang": "ja",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

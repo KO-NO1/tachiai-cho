@@ -1,0 +1,12 @@
+{
+  "name": "tachiai-cho",
+  "version": "1.0.0",
+  "private": true,
+  "description": "退去立会いの記録。ブラウザで開く静的サイト。",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

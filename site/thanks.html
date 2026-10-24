@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>購入後 — 立会い帳</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <main class="narrow section">
+    <p class="sub">立会い帳</p>
+    <h1>このブラウザで、印刷と確認リストを開きました。</h1>
+    <p>記録の画面に戻り、まとめから印刷できます。別のブラウザや別の端末では、もう一度このページを開いてください。販売は公開準備中です。このページを開いただけでは代金は発生しません。</p>
+    <p><a class="btn" href="app.html#summary">まとめへ戻る</a></p>
+    <div id="checks"></div>
+  </main>
+  <script src="js/model.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/metrics.js"></script>
+  <script>
+    TachiaiModel.setUnlocked(localStorage);
+    TachiaiMetrics.track("unlock_seen");
+    var box = document.getElementById("checks");
+    TachiaiModel.BILL_CHECKS.forEach(function (check) {
+      var card = document.createElement("article");
+      card.className = "panel";
+      var h = document.createElement("h2");
+      h.textContent = check.title;
+      var p = document.createElement("p");
+      p.textContent = check.body;
+      card.appendChild(h);
+      card.appendChild(p);
+      box.appendChild(card);
+    });
+  </script>
+</body>
+</html>
