@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#221e1a">
   <title>立会い帳 — 退去立会いの記録</title>
-  <meta name="description" content="退去の立会い中に、部屋の状態と、その場で言われたことをスマホへ残す。画面の記録は無料。印刷用の記録は買い切り1,480円。法律相談ではありません。">
+  <meta name="description" content="退去の立会い中に、部屋の状態と、その場で言われたことをスマホへ残す。画面の記録は無料。印刷用の記録は買い切り500円。法律相談ではありません。">
   <link rel="stylesheet" href="css/app.css">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,16 +57,18 @@
     <section class="narrow section" id="price">
       <h2>料金</h2>
       <div class="panel">
-        <p class="price">1,480円</p>
-        <p>買い切りです。月額ではありません。</p>
+        <p class="price">500円</p>
+        <p>買い切りです。月額ではありません。カードで支払います。</p>
         <table>
           <tbody>
             <tr><th>無料</th><td>全部屋の画面記録。金額をその場で了承しない案内。まとめの表示。</td></tr>
-            <tr><th>1,480円</th><td>印刷用の記録、ブラウザに保存した記録ファイルの書き出しと読み込み、請求書が届いたあとに開く確認リスト。</td></tr>
+            <tr><th>500円</th><td>印刷用の記録、ブラウザに保存した記録ファイルの書き出しと読み込み、請求書が届いたあとに開く確認リスト。</td></tr>
           </tbody>
         </table>
         <p>購入すると、そのブラウザだけ機能が開きます。他の端末には引き継がれません。画面を見れば内容は分かるので、印刷が不要なら買う必要はありません。</p>
-        <p class="banner warn">購入の受け付けはまだ始めていません。決済URLを設定するまで、お金は払えない状態です。</p>
+        <form method="post" action="/api/checkout">
+          <button class="btn" type="submit" onclick="if (window.TachiaiMetrics) TachiaiMetrics.track('pay_click')">500円で購入する</button>
+        </form>
       </div>
     </section>
 
@@ -93,7 +95,7 @@
   </main>
   <footer class="wrap site-footer">
     <p>立会い帳は、退去立会いの記録用です。敷金が戻ることは保証しません。</p>
-    <p><a href="legal.html">特定商取引法に基づく表記（販売前）と、計測について</a></p>
+    <p><a href="legal.html">特定商取引法に基づく表記と、計測について</a></p>
   </footer>
   <script src="js/config.js"></script>
   <script src="js/metrics.js"></script>

@@ -7,7 +7,7 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   var STORAGE_KEY = "tachiai-cho-record-v1";
   var UNLOCK_KEY = "tachiai-cho-unlock-v1";
-  var PRICE_YEN = 1480;
+  var PRICE_YEN = 500;
   var NOTE_MAX = 200;
   var AMOUNT_MAX = 80;
   var PROPERTY_MAX = 80;

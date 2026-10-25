@@ -1,4 +1,4 @@
-var CACHE = "tachiai-v3";
+var CACHE = "tachiai-v4";
 
 self.addEventListener("install", function (event) {
   self.skipWaiting();

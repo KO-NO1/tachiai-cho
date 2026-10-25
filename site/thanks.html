@@ -10,29 +10,9 @@
 <body>
   <main class="narrow section">
     <p class="sub">立会い帳</p>
-    <h1>このブラウザで、印刷と確認リストを開きました。</h1>
-    <p>記録の画面に戻り、まとめから印刷できます。別のブラウザや別の端末では、もう一度このページを開いてください。販売は公開準備中です。このページを開いただけでは代金は発生しません。</p>
-    <p><a class="btn" href="app.html#summary">まとめへ戻る</a></p>
-    <div id="checks"></div>
+    <h1>このページでは、有料の機能は開きません。</h1>
+    <p>支払ったあとに開く確認ページだけで、印刷と確認リストを開きます。このアドレスを開いても代金は発生せず、機能も開きません。</p>
+    <p><a class="btn" href="index.html#price">料金へ戻る</a></p>
   </main>
-  <script src="js/model.js"></script>
-  <script src="js/config.js"></script>
-  <script src="js/metrics.js"></script>
-  <script>
-    TachiaiModel.setUnlocked(localStorage);
-    TachiaiMetrics.track("unlock_seen");
-    var box = document.getElementById("checks");
-    TachiaiModel.BILL_CHECKS.forEach(function (check) {
-      var card = document.createElement("article");
-      card.className = "panel";
-      var h = document.createElement("h2");
-      h.textContent = check.title;
-      var p = document.createElement("p");
-      p.textContent = check.body;
-      card.appendChild(h);
-      card.appendChild(p);
-      box.appendChild(card);
-    });
-  </script>
 </body>
 </html>

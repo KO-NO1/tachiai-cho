@@ -287,17 +287,25 @@
     box.style.padding = "16px";
     box.appendChild(el("h3", {}, "印刷用の記録と、残りの確認リスト"));
     box.appendChild(el("p", {}, "画面の記録と、金額をその場で了承しない案内は無料です。買い切り " + Number(config.priceYen).toLocaleString("ja-JP") + "円で、印刷用の体裁、記録ファイルの保存、請求書が届いたあとの確認リストを開きます。"));
-    box.appendChild(el("p", { className: "sub" }, "開くのは購入したブラウザだけです。コピー防止にはなっていません。" + (config.paymentUrl ? "" : "販売はまだ始めていません。")));
-    if (config.paymentUrl) {
-      var link = el("a", { className: "btn", href: config.paymentUrl }, "購入ページを開く");
-      link.addEventListener("click", function () { metrics.track("pay_click"); });
-      box.appendChild(link);
-    } else {
-      box.appendChild(el("p", { className: "banner warn" }, "購入URLは未設定です。決済はまだ使えません。"));
-      if (isLocalHost()) {
-        var test = el("a", { href: "thanks.html" }, "この端末だけの確認用ページ");
-        box.appendChild(test);
-      }
+    box.appendChild(el("p", { className: "sub" }, "開くのは購入したブラウザだけです。コピー防止にはなっていません。"));
+    var form = document.createElement("form");
+    form.method = "post";
+    form.action = "/api/checkout";
+    var submit = document.createElement("button");
+    submit.className = "btn";
+    submit.type = "submit";
+    submit.textContent = Number(config.priceYen).toLocaleString("ja-JP") + "円で購入する";
+    form.addEventListener("submit", function () {
+      metrics.track("pay_click");
+      setTimeout(function () {
+        submit.disabled = true;
+        submit.textContent = "決済画面を開いています";
+      }, 0);
+    });
+    form.appendChild(submit);
+    box.appendChild(form);
+    if (isLocalHost()) {
+      box.appendChild(el("a", { href: "app.html?unlock=1" }, "この端末だけの確認用ページ"));
     }
     return box;
   }

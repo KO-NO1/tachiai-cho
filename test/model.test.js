@@ -80,6 +80,7 @@ assert.strictEqual(M.isUnlocked(unlockedStore), true);
 assert.strictEqual(M.visibleChecks(false).length, 1);
 assert.strictEqual(M.visibleChecks(true).length, M.BILL_CHECKS.length);
 
+assert.strictEqual(M.PRICE_YEN, 500);
 assert.strictEqual(M.boothDownloadFeeYen(1480), 128);
 assert.strictEqual(1480 - M.boothDownloadFeeYen(1480), 1352);
 assert.throws(function () { M.boothDownloadFeeYen(14.8); }, /価格/);
